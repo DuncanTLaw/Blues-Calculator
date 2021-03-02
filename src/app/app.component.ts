@@ -16,9 +16,14 @@ export class AppComponent {
   blueAchieved: string;
   ipfPoints: number;
   userTotal: number;
+  totalSelected: boolean;
 
   goalIPF: number;
   goalTotal: number;
+
+  onSelect(event: any): void {
+    this.totalSelected = (event === 'sbd') ? false : true;
+  }
 
   coeffChange(form: NgForm): void {
     this.male = (form.value.gender === 'M') ? true : false;
@@ -37,9 +42,9 @@ export class AppComponent {
 
   calcBlue(form: NgForm): void {
     this.coeffChange(form);
-    if (form.value.total) {
+    if (this.totalSelected === true) {
       this.userTotal = form.value.total;
-    } else if (form.value.squat && form.value.bench && form.value.deadlift) {
+    } else {
       this.userTotal = form.value.squat + form.value.bench + form.value.deadlift;
     }
     this.ipfPoints = 500 + 100 * (

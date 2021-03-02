@@ -32,7 +32,30 @@
             />
           </div>
         </div>
-        <div class="form-group">
+        <div class="custom-control custom-radio">
+          <input
+            class="custom-control-input"
+            type="radio"
+            id="SBD"
+            name="type"
+            value="sbd"
+            (change)="onSelect($event.target.value)"
+            checked=true
+          />
+          <label class="custom-control-label" for="SBD">SBD</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input
+            class="custom-control-input"
+            type="radio"
+            id="Total"
+            name="type"
+            value="total"
+            (change)="onSelect($event.target.value)"
+          />
+          <label class="custom-control-label" for="Total">Total</label>
+        </div>
+        <div class="form-group" *ngIf="!totalSelected">
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">SBD</span>
@@ -45,6 +68,7 @@
                   name="squat"
                   ngModel
                   placeholder="Squat"
+                  (input)="calcBlue(blues)"
                 />
               </div>
               <div class="col">
@@ -54,6 +78,7 @@
                   name="bench"
                   ngModel
                   placeholder="Bench"
+                  (input)="calcBlue(blues)"
                 />
               </div>
               <div class="col">
@@ -63,12 +88,13 @@
                   name="deadlift"
                   ngModel
                   placeholder="Deadlift"
+                  (input)="calcBlue(blues)"
                 />
               </div>
             </div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" *ngIf="totalSelected">
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">Total</span>
@@ -76,7 +102,7 @@
             <input
               class="form-control"
               type="number"
-              [ngModel="userTotal"
+              [ngModel]="userTotal"
               name="total"
               (input)="calcBlue(blues)"
             />
