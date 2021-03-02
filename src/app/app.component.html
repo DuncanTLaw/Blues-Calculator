@@ -11,7 +11,6 @@
             <select
               ngModel
               name="gender"
-              required
               (change)="calcBlue(blues)"
             >
               <option value="M">Male</option>
@@ -25,12 +24,48 @@
               <span class="input-group-text">Bodyweight</span>
             </div>
             <input
+              class="form-control"
               type="number"
               ngModel
               name="weight"
-              required
               (input)="calcBlue(blues)"
             />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">SBD</span>
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <input
+                  class="form-control"
+                  type="number"
+                  name="squat"
+                  ngModel
+                  placeholder="Squat"
+                />
+              </div>
+              <div class="col">
+                <input
+                  class="form-control"
+                  type="number"
+                  name="bench"
+                  ngModel
+                  placeholder="Bench"
+                />
+              </div>
+              <div class="col">
+                <input
+                  class="form-control"
+                  type="number"
+                  name="deadlift"
+                  ngModel
+                  placeholder="Deadlift"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -39,10 +74,10 @@
               <span class="input-group-text">Total</span>
             </div>
             <input
+              class="form-control"
               type="number"
-              ngModel
+              [ngModel="userTotal"
               name="total"
-              required
               (input)="calcBlue(blues)"
             />
           </div>
@@ -63,7 +98,6 @@
             <select
               ngModel
               name="gender"
-              required
               (change)="calcGoal(goalBlues)"
             >
               <option value="M">Male</option>
@@ -77,10 +111,10 @@
               <span class="input-group-text">Bodyweight</span>
             </div>
             <input
+              class="form-control"
               type="number"
               ngModel
               name="weight"
-              required
               (input)="calcGoal(goalBlues)"
             />
           </div>
@@ -93,7 +127,6 @@
             <select
               ngModel
               name="goalBlue"
-              required
               (change)="calcGoal(goalBlues)"
             >
               <option value="full">Full Blue</option>

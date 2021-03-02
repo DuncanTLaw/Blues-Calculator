@@ -15,6 +15,7 @@ export class AppComponent {
 
   blueAchieved: string;
   ipfPoints: number;
+  userTotal: number;
 
   goalIPF: number;
   goalTotal: number;
@@ -36,8 +37,13 @@ export class AppComponent {
 
   calcBlue(form: NgForm): void {
     this.coeffChange(form);
+    if (form.value.total) {
+      this.userTotal = form.value.total;
+    } else if (form.value.squat && form.value.bench && form.value.deadlift) {
+      this.userTotal = form.value.squat + form.value.bench + form.value.deadlift;
+    }
     this.ipfPoints = 500 + 100 * (
-      (form.value.total - (this.c1 * Math.log(form.value.weight) - this.c2)) /
+      (this.userTotal - (this.c1 * Math.log(form.value.weight) - this.c2)) /
       (this.c3 * Math.log(form.value.weight) - this.c4)
     );
     if (this.ipfPoints) {
