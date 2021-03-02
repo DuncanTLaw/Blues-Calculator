@@ -1,52 +1,108 @@
-<div class="card">
-  <div class="card-header">OUPLC Blues Standard</div>
-  <div class="card-body">
-    <form #blues="ngForm">
-      <div class="form-group">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Gender</span>
+<div class="card-deck">
+  <div class="card">
+    <div class="card-header">OUPLC Blues Standard</div>
+    <div class="card-body">
+      <form #blues="ngForm">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Gender</span>
+            </div>
+            <select
+              ngModel
+              name="gender"
+              required
+              (change)="calcBlue(blues)"
+            >
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
           </div>
-          <select
-            ngModel
-            name="gender"
-            required
-            (input)="calcBlue(blues)"
-          >
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select>
         </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Bodyweight</span>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Bodyweight</span>
+            </div>
+            <input
+              type="number"
+              ngModel
+              name="weight"
+              required
+              (input)="calcBlue(blues)"
+            />
           </div>
-          <input
-            type="number"
-            ngModel
-            name="weight"
-            required
-            (input)="calcBlue(blues)"
-          />
         </div>
-      </div>
-      <div class="form-group">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Total</span>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Total</span>
+            </div>
+            <input
+              type="number"
+              ngModel
+              name="total"
+              required
+              (input)="calcBlue(blues)"
+            />
           </div>
-          <input
-            type="number"
-            ngModel
-            name="total"
-            required
-            (input)="calcBlue(blues)"
-          />
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+    <div class="card-footer">Blue achieved: {{blueAchieved}}</div>
   </div>
-  <div class="card-footer">Blue achieved: {{blueAchieved}}</div>
+  <div class="card">
+    <div class="card-header">Goal toggle</div>
+    <div class="card-body">
+      <form #goalBlues="ngForm">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Gender</span>
+            </div>
+            <select
+              ngModel
+              name="gender"
+              required
+              (change)="calcGoal(goalBlues)"
+            >
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Bodyweight</span>
+            </div>
+            <input
+              type="number"
+              ngModel
+              name="weight"
+              required
+              (input)="calcGoal(goalBlues)"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Goal</span>
+            </div>
+            <select
+              ngModel
+              name="goalBlue"
+              required
+              (change)="calcGoal(goalBlues)"
+            >
+              <option value="full">Full Blue</option>
+              <option value="half">Half Blue</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">Goal total: {{ goalTotal }}</div>
+  </div>
 </div>
