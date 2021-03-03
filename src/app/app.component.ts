@@ -17,6 +17,9 @@ export class AppComponent {
   ipfPoints: number;
   userTotal: number;
   totalSelected: boolean;
+  squatNo: number;
+  benchNo: number;
+  deadliftNo: number;
 
   goalIPF: number;
   goalTotal: number;
@@ -46,6 +49,9 @@ export class AppComponent {
       this.userTotal = form.value.total;
     } else {
       this.userTotal = form.value.squat + form.value.bench + form.value.deadlift;
+      this.squatNo = form.value.squat;
+      this.benchNo = form.value.bench;
+      this.deadliftNo = form.value.deadlift;
     }
     this.ipfPoints = 500 + 100 * (
       (this.userTotal - (this.c1 * Math.log(form.value.weight) - this.c2)) /

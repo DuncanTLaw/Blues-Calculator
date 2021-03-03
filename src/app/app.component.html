@@ -56,41 +56,36 @@
           <label class="custom-control-label" for="Total">Total</label>
         </div>
         <div class="form-group" *ngIf="!totalSelected">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">SBD</span>
+          <div class="form-row">
+            <div class="col">
+              <input
+                class="form-control"
+                type="number"
+                name="squat"
+                [ngModel]="squatNo"
+                placeholder="Squat"
+                (input)="calcBlue(blues)"
+              />
             </div>
-            <div class="form-row">
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  name="squat"
-                  ngModel
-                  placeholder="Squat"
-                  (input)="calcBlue(blues)"
-                />
-              </div>
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  name="bench"
-                  ngModel
-                  placeholder="Bench"
-                  (input)="calcBlue(blues)"
-                />
-              </div>
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  name="deadlift"
-                  ngModel
-                  placeholder="Deadlift"
-                  (input)="calcBlue(blues)"
-                />
-              </div>
+            <div class="col">
+              <input
+                class="form-control"
+                type="number"
+                name="bench"
+                [ngModel]="benchNo"
+                placeholder="Bench"
+                (input)="calcBlue(blues)"
+              />
+            </div>
+            <div class="col">
+              <input
+                class="form-control"
+                type="number"
+                name="deadlift"
+                [ngModel]="deadliftNo"
+                placeholder="Deadlift"
+                (input)="calcBlue(blues)"
+              />
             </div>
           </div>
         </div>
