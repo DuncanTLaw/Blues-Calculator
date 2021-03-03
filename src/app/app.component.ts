@@ -60,7 +60,7 @@ export class AppComponent {
       (this.userTotal - (this.c1 * Math.log(form.value.weight) - this.c2)) /
       (this.c3 * Math.log(form.value.weight) - this.c4)
     );
-    if (this.ipfPoints) {
+    if (this.ipfPoints && form.value.gender && form.value.weight) {
       if (this.ipfPoints < 500) {
         this.blueAchieved = 'None';
       } else if (this.ipfPoints >= 500 && this.ipfPoints < 560) {
