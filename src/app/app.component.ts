@@ -78,7 +78,9 @@ export class AppComponent {
     } else {
       this.goalIPF = 500;
     }
-    this.goalTotal = ((this.goalIPF - 500) / 100) * (this.c3 * Math.log(form.value.weight) - this.c4) +
-      (this.c1 * Math.log(form.value.weight) - this.c2);
+    if (form.value.gender && form.value.weight && form.value.goalBlue) {
+      this.goalTotal = +(((this.goalIPF - 500) / 100) * (this.c3 * Math.log(form.value.weight) - this.c4) +
+        (this.c1 * Math.log(form.value.weight) - this.c2)).toFixed(2);
+    }
   }
 }
