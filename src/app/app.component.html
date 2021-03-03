@@ -9,7 +9,7 @@
               <span class="input-group-text">Gender</span>
             </div>
             <select
-              ngModel
+              [ngModel]="userGender"
               name="gender"
               (change)="calcBlue(blues)"
             >
@@ -117,7 +117,7 @@
               <span class="input-group-text">Gender</span>
             </div>
             <select
-              ngModel
+              [ngModel]="userGender"
               name="gender"
               (change)="calcGoal(goalBlues)"
             >

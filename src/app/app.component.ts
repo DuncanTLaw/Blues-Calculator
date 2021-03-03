@@ -12,6 +12,7 @@ export class AppComponent {
   c2: number;
   c3: number;
   c4: number;
+  userGender: string;
 
   blueAchieved: string;
   ipfPoints: number;
@@ -30,6 +31,7 @@ export class AppComponent {
 
   coeffChange(form: NgForm): void {
     this.male = (form.value.gender === 'M') ? true : false;
+    this.userGender = form.value.gender;
     if (this.male) {
       this.c1 = 310.67;
       this.c2 = 857.785;
@@ -45,6 +47,7 @@ export class AppComponent {
 
   calcBlue(form: NgForm): void {
     this.coeffChange(form);
+    this.userGender = form.value.gender;
     if (this.totalSelected === true) {
       this.userTotal = form.value.total;
     } else {
