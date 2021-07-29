@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   userMale: boolean;
   userWeight: number;
+  calcDiff = false;
 
   c1: number;
   c2: number;
@@ -26,6 +27,9 @@ export class AppComponent {
   goalBlue: string;
   goalTotal: number;
   goalTotalStr: string;
+  theoreticalTotal: number;
+  blueDiff: string;
+  hBlueDiff: string;
 
   coeffChange(): void {
     if (this.userMale) {
@@ -42,15 +46,15 @@ export class AppComponent {
   }
 
   calcBlue(): void {
-    this.coeffChange();
-    if (!this.totalSelected) {
-      this.userTotal = this.squatNo + this.benchNo + this.deadliftNo;
-    }
-    this.ipfPoints = 500 + 100 * (
-      (this.userTotal - (this.c1 * Math.log(this.userWeight) - this.c2)) /
-      (this.c3 * Math.log(this.userWeight) - this.c4)
-    );
-    if (this.ipfPoints && this.userWeight && this.userWeight) {
+    if (this.userMale && this.userWeight) {
+      this.coeffChange();
+      if (!this.totalSelected) {
+        this.userTotal = this.squatNo + this.benchNo + this.deadliftNo;
+      }
+      this.ipfPoints = 500 + 100 * (
+        (this.userTotal - (this.c1 * Math.log(this.userWeight) - this.c2)) /
+        (this.c3 * Math.log(this.userWeight) - this.c4)
+      );
       if (this.ipfPoints < 500) {
         this.blueAchieved = 'None';
       } else if (this.ipfPoints >= 500 && this.ipfPoints < 560) {
@@ -62,17 +66,29 @@ export class AppComponent {
   }
 
   calcGoal(): void {
-    let goalIPF: number;
-    this.coeffChange();
-    if (this.goalBlue === 'full') {
-      goalIPF = 560;
-    } else if (this.goalBlue === 'half') {
-      goalIPF = 500;
-    }
     if (this.userMale && this.goalWeight && this.goalBlue) {
+      this.coeffChange();
+      const goalIPF = (this.goalBlue === 'full') ? 560 : (this.goalBlue === 'half') ? 500 : null;
       this.goalTotal = +(((goalIPF - 500) / 100) * (this.c3 * Math.log(this.goalWeight) - this.c4) +
         (this.c1 * Math.log(this.goalWeight) - this.c2)).toFixed(2);
       this.goalTotalStr = this.goalTotal.toString() + ' kg';
+    }
+    this.calcDeviation();
+  }
+
+  onClickCalc(): void {
+    this.calcDiff = !this.calcDiff;
+  }
+
+  calcDeviation(): void {
+    if (this.goalTotal && this.theoreticalTotal) {
+      if (this.goalTotal < this.theoreticalTotal) {
+        this.blueDiff = 'achieved';
+        this.hBlueDiff = 'achieved';
+      } else {
+        this.blueDiff = (this.goalTotal - this.theoreticalTotal).toFixed(2) + ' kg remaining';
+        this.hBlueDiff = (this.goalTotal - this.theoreticalTotal).toFixed(2) + ' kg remaining';
+      }
     }
   }
 }
