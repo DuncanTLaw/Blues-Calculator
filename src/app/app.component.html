@@ -1,166 +1,137 @@
-<div class="container-fluid mt-3">
+<div class="container-fluid" style="padding-top: 20px;">
+
   <div class="card-deck">
+
     <div class="card">
-      <div class="card-header">OUPLC Blues Standard</div>
+      <div class="card-header" style="font-size: 18pt;">OUPLC Blues Standard</div>
       <div class="card-body">
-        <form #blues="ngForm">
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Gender</span>
-              </div>
-              <select
-                [ngModel]="userGender"
-                name="gender"
-                (change)="calcBlue(blues)"
-              >
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Bodyweight</span>
-              </div>
-              <input
-                class="form-control"
-                type="number"
-                ngModel
-                name="weight"
-                (input)="calcBlue(blues)"
-              />
-            </div>
-          </div>
-          <div class="custom-control custom-radio">
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select
+            [(ngModel)]="userMale"
+            name="gender"
+            (selectionChange)="calcBlue()"
+          >
+            <mat-option value="true">Male</mat-option>
+            <mat-option value="false">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Bodyweight</mat-label>
+          <input
+            matInput
+            [(ngModel)]="userWeight"
+            type="number"
+            name="weight"
+            (input)="calcBlue()"
+          >
+          <span matSuffix>kg</span>
+        </mat-form-field>
+        <section
+          style="display: flex; align-content: center; align-items: center; margin-bottom: 5px;"
+        >
+          <mat-radio-group
+            [(ngModel)]="totalSelected"
+            name="totalSelected"
+          >
+            <mat-radio-button [value]="false" style="margin: 0 10px;">SBD</mat-radio-button>
+            <mat-radio-button [value]="true">Total</mat-radio-button>
+          </mat-radio-group>
+        </section>
+        <div *ngIf="!totalSelected">
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Squat</mat-label>
             <input
-              class="custom-control-input"
-              type="radio"
-              id="SBD"
-              name="type"
-              value="sbd"
-              (change)="onSelect($event.target.value)"
-              checked=true
-            />
-            <label class="custom-control-label" for="SBD">SBD</label>
-          </div>
-          <div class="custom-control custom-radio">
+              matInput
+              type="number"
+              name="squat"
+              [(ngModel)]="squatNo"
+              (input)="calcBlue(blues)"
+            >
+            <span matSuffix>kg</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Bench</mat-label>
             <input
-              class="custom-control-input"
-              type="radio"
-              id="Total"
-              name="type"
-              value="total"
-              (change)="onSelect($event.target.value)"
-            />
-            <label class="custom-control-label" for="Total">Total</label>
-          </div>
-          <div class="form-group" *ngIf="!totalSelected">
-            <div class="form-row">
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  name="squat"
-                  [ngModel]="squatNo"
-                  placeholder="Squat"
-                  (input)="calcBlue(blues)"
-                />
-              </div>
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  name="bench"
-                  [ngModel]="benchNo"
-                  placeholder="Bench"
-                  (input)="calcBlue(blues)"
-                />
-              </div>
-              <div class="col">
-                <input
-                  class="form-control"
-                  type="number"
-                  name="deadlift"
-                  [ngModel]="deadliftNo"
-                  placeholder="Deadlift"
-                  (input)="calcBlue(blues)"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="form-group" *ngIf="totalSelected">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Total</span>
-              </div>
-              <input
-                class="form-control"
-                type="number"
-                [ngModel]="userTotal"
-                name="total"
-                (input)="calcBlue(blues)"
-              />
-            </div>
-          </div>
-        </form>
+              matInput
+              type="number"
+              name="bench"
+              [(ngModel)]="benchNo"
+              (input)="calcBlue(blues)"
+            >
+            <span matSuffix>kg</span>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Deadlift</mat-label>
+            <input
+              matInput
+              type="number"
+              name="deadlift"
+              [(ngModel)]="deadliftNo"
+              (input)="calcBlue(blues)"
+            >
+            <span matSuffix>kg</span>
+          </mat-form-field>
+          <h5 style="text-align: end;">= {{ userTotal || 0 }} kg total</h5>
+        </div>
+        <div *ngIf="totalSelected">
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Total</mat-label>
+            <input
+              matInput
+              type="number"
+              name="total"
+              [(ngModel)]="userTotal"
+              (input)="calcBlue(blues)"
+            >
+            <span matSuffix>kg</span>
+          </mat-form-field>
+        </div>
       </div>
-      <div class="card-footer">Blue achieved: {{blueAchieved}}</div>
+      <div class="card-footer">Blue achieved: {{ blueAchieved }}</div>
     </div>
+
     <div class="card">
-      <div class="card-header">Goal toggle</div>
+      <div class="card-header" style="font-size: 18pt;">Goal toggle</div>
       <div class="card-body">
-        <form #goalBlues="ngForm">
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Gender</span>
-              </div>
-              <select
-                [ngModel]="userGender"
-                name="gender"
-                (change)="calcGoal(goalBlues)"
-              >
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Bodyweight</span>
-              </div>
-              <input
-                class="form-control"
-                type="number"
-                ngModel
-                name="weight"
-                (input)="calcGoal(goalBlues)"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Goal</span>
-              </div>
-              <select
-                ngModel
-                name="goalBlue"
-                (change)="calcGoal(goalBlues)"
-              >
-                <option value="full">Full Blue</option>
-                <option value="half">Half Blue</option>
-              </select>
-            </div>
-          </div>
-        </form>
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select
+            [(ngModel)]="userMale"
+            name="gender"
+            (selectionChange)="calcGoal()"
+          >
+            <mat-option value="true">Male</mat-option>
+            <mat-option value="false">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Bodyweight</mat-label>
+          <input
+            matInput
+            [(ngModel)]="goalWeight"
+            type="number"
+            name="weight"
+            (input)="calcGoal()"
+          >
+          <span matSuffix>kg</span>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Goal</mat-label>
+          <mat-select
+            [(ngModel)]="goalBlue"
+            name="goalBlue"
+            (selectionChange)="calcGoal()"
+          >
+            <mat-option value="full">Full Blue</mat-option>
+            <mat-option value="half">Half Blue</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="card-footer">Goal total: {{ goalTotal }}</div>
+      <div class="card-footer">Goal total: {{ goalTotalStr }}</div>
     </div>
   </div>
+
   <footer class="footer mt-sm-5">
     <div class="row align-items-center justify-content-xl-between">
       <div class="col-xl-6">
