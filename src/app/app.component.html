@@ -90,6 +90,7 @@
             <span matSuffix>kg</span>
           </mat-form-field>
         </div>
+        <h5 style="text-align: end;">{{ (ipfPoints | number : '1.2-2') || 0 }} IPF points</h5>
       </div>
       <div class="card-footer"><h5>Blue achieved: {{ blueAchieved }}</h5></div>
     </div>
