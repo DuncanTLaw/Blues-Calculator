@@ -15,8 +15,8 @@
             name="gender"
             (selectionChange)="calcBlue()"
           >
-            <mat-option value="true">Male</mat-option>
-            <mat-option value="false">Female</mat-option>
+            <mat-option [value]="true">Male</mat-option>
+            <mat-option [value]="false">Female</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill" style="width: 100%;">
@@ -107,8 +107,8 @@
             name="gender"
             (selectionChange)="calcGoal()"
           >
-            <mat-option value="true">Male</mat-option>
-            <mat-option value="false">Female</mat-option>
+            <mat-option [value]="true">Male</mat-option>
+            <mat-option [value]="false">Female</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill" style="width: 100%;">

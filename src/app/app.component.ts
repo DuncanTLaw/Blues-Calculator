@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  blueScore = 560;
+  hBlueScore = 500;
   userMale: boolean;
   userWeight: number;
   calcDiff = false;
@@ -37,7 +39,7 @@ export class AppComponent {
       this.c2 = 857.785;
       this.c3 = 53.216;
       this.c4 = 147.0835;
-    } else {
+    } else if (!this.userMale) {
       this.c1 = 125.1435;
       this.c2 = 228.03;
       this.c3 = 34.5246;
@@ -46,7 +48,7 @@ export class AppComponent {
   }
 
   calcBlue(): void {
-    if (this.userMale && this.userWeight) {
+    if (this.userWeight) {
       this.coeffChange();
       if (!this.totalSelected) {
         this.userTotal = this.squatNo + this.benchNo + this.deadliftNo;
@@ -55,20 +57,20 @@ export class AppComponent {
         (this.userTotal - (this.c1 * Math.log(this.userWeight) - this.c2)) /
         (this.c3 * Math.log(this.userWeight) - this.c4)
       );
-      if (this.ipfPoints < 500) {
+      if (this.ipfPoints < this.hBlueScore) {
         this.blueAchieved = 'None';
-      } else if (this.ipfPoints >= 500 && this.ipfPoints < 560) {
+      } else if (this.ipfPoints >= this.hBlueScore && this.ipfPoints < this.blueScore) {
         this.blueAchieved = 'Half Blue';
-      } else {
+      } else if (this.ipfPoints >= this.blueScore) {
         this.blueAchieved = 'Full Blue';
       }
     }
   }
 
   calcGoal(): void {
-    if (this.userMale && this.goalWeight && this.goalBlue) {
+    if (this.goalWeight && this.goalBlue) {
       this.coeffChange();
-      const goalIPF = (this.goalBlue === 'full') ? 560 : (this.goalBlue === 'half') ? 500 : null;
+      const goalIPF = (this.goalBlue === 'full') ? this.blueScore : (this.goalBlue === 'half') ? this.hBlueScore : null;
       this.goalTotal = +(((goalIPF - 500) / 100) * (this.c3 * Math.log(this.goalWeight) - this.c4) +
         (this.c1 * Math.log(this.goalWeight) - this.c2)).toFixed(2);
       this.goalTotalStr = this.goalTotal.toString() + ' kg';
