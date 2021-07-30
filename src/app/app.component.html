@@ -5,7 +5,7 @@
     <div class="card">
       <div class="card-header">
         <h3>OUPLC Blues Standard</h3>
-        <h6 style="color: darkgray;">Calculate what Blues certification your current total will get.</h6>
+        <h6 style="color: darkgray; margin-bottom: 0;">Calculate what Blues certification your current total will get.</h6>
       </div>
       <div class="card-body">
         <mat-form-field>
@@ -90,15 +90,15 @@
             <span matSuffix>kg</span>
           </mat-form-field>
         </div>
-        <h5 style="text-align: end;">{{ (ipfPoints | number : '1.2-2') || 0 }} IPF points</h5>
+        <h5 style="text-align: end; margin-bottom: 0;">{{ (ipfPoints | number : '1.2-2') || 0 }} IPF points</h5>
       </div>
-      <div class="card-footer"><h5>Blue achieved: {{ blueAchieved }}</h5></div>
+      <div class="card-footer"><h5 style="margin-bottom: 0;">Blue achieved: {{ blueAchieved }}</h5></div>
     </div>
 
     <div class="card">
       <div class="card-header" style="font-size: 18pt;">
         <h3>Goal Toggle</h3>
-        <h6 style="color: darkgray;">Calculate what you need to total to obtain your goal Blues certification.</h6>
+        <h6 style="color: darkgray; margin-bottom: 0;">Calculate what you need to total to obtain your goal Blues certification.</h6>
       </div>
       <div class="card-body">
         <mat-form-field>
@@ -172,7 +172,7 @@
           </div>
         </div>
       </div>
-      <div class="card-footer"><h5>Goal total: {{ goalTotalStr }}</h5></div>
+      <div class="card-footer"><h5 style="margin-bottom: 0;">Goal total: {{ goalTotalStr }}</h5></div>
     </div>
   </div>
 
